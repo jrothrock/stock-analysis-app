@@ -1,0 +1,103 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+
+.list {
+	border-top: 1px solid black;
+
+	&:last-child{
+		margin-bottom: 20px;
+	}
+	.col-md-1 {
+		height: 50px;
+		border-right: 1px solid black;
+		border-bottom: 1px solid black;
+		overflow: hidden;
+	}
+	.first-block {
+		border-left: 1px solid black;
+	}
+
+	p {
+		margin-left:-10px;
+	}
+
+}
+.selector {
+	padding-left: 25px;
+	color: blue;
+	
+	&:hover {
+		cursor: pointer;
+		text-decoration: underline;
+		color:purple;
+	}
+}
+.nav-tabs {
+	border-bottom: 1px solid #ddd;
+  
+	text-align:center;
+
+  	li {
+		margin-bottom: 0;
+		position: initial;
+		float:none;
+		display:inline-block;
+		*display:inline; /* ie7 fix */
+		zoom:1; /* hasLayout ie7 trigger */
+	}
+}
+
+
+
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover {
+  border-width: 0;
+}
+
+.nav-tabs > li > a {
+  border: none;
+  color: #999;
+  margin: 0;
+}
+
+.nav-tabs > li.active > a {
+  border: none;
+  color: #428bca !important;
+  background: transparent;
+}
+
+.nav-tabs > li > a:hover {
+  background: transparent;
+}
+
+.tab-content {
+  padding: 20px;
+}
+
+#magic-line {
+  visibility: hidden;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100px;
+  height: 2px;
+  background: #428bca;
+}

@@ -1,0 +1,35 @@
+<% flash.each do |name, msg| %>
+          <%= content_tag :div, msg, class: "flash alert alert-info col-md-4 col-md-offset-4" %>
+<% end %>
+	<row>
+		<div class='col-md-10 col-md-offset-1'>
+		 <ul class="nav nav-tabs" role="tablist" id='category_tabs'>
+		    <li role="presentation" class="active"><a href="#reports" aria-controls="reports" role="tab" data-toggle="tab">Reports</a></li>
+		    <li role="presentation"><%= link_to 'Weather', '#weather', role: :tab,
+	          data: { toggle: :tab },
+	          aria: { controls: :reports },
+	          remote: true %></li>
+		    <li role="presentation"><%= link_to 'Fundamentals', '#fundamentals', id: 'fundamentals-button', role: :tab, data: { toggle: :tab }, aria: { controls: :fundamentals }, remote: true %></li>
+		  </ul>
+		</div>
+	</row>
+	<row>
+
+	<div class="tab-content">
+	    <div role="tabpanel" class="tab-pane active" id="reports">
+	    	<div class="col-md-10 col-md-offset-1">
+				<%= render 'scans/scans' %>
+			</div>
+		</div>
+	    <div role="tabpanel" class="tab-pane" id="weather">
+	    	<div class="col-md-10 col-md-offset-1" id='weather-content'>
+		    	
+		    </div>
+	    </div>
+	    <div role="tabpanel" class="tab-pane" id="fundamentals">
+	    	<div class="col-md-10 col-md-offset-1" id='fundamentals-content'>
+				 
+			</div>
+	    </div>
+	  </div>
+	</row>

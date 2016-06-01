@@ -1,0 +1,28 @@
+-if current_user && current_user.admin?
+	= form_tag forecasts_path, method: :post do 
+		= submit_tag 'New Report', class: "btn btn-large btn-info", id: 'weather', style: "margin-top: 10px"
+
+-if(@temps)
+	.row
+		.col-md-12
+			%h4 Last week's weather predictions:
+			%br
+			-if @fcl
+				%p=checkPrediction(@projections, @actuals)
+			-else
+				%p=checkLength #Found in the app_helper, underneath checkPrediction
+			%hr
+
+	.row
+		.col-md-12{style: "margin-bottom:10px"}
+			%h4 This week's weather predictions:
+			%h5 Weather Data generated: #{time_ago_in_words @temps.created_at} ago (#{@temps.created_at})
+			%br
+			%p This week's average, national, high is #{@averageHigh}, while the average, national, low is #{@averageLow}.
+			%br
+
+			-@cities.each do |city|
+				%h4=city[0]
+				= render '/forecasts/block', forecast: city, temps: @temps 
+-else
+	%h5 There have been no forecast reports generated

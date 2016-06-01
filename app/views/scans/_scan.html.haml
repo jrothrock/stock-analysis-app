@@ -1,0 +1,26 @@
+.row.list{class: "row-#{scan.id}" }
+	.col-md-1.first-block
+		%p=time_ago_in_words scan.created_at
+	.col-md-1
+		%p=scan.user.user_name
+	.col-md-1
+		%p=scan.name
+	.col-md-1.ticker
+		%p=scan.stock
+	.col-md-1
+		%p=scan.bookvalue
+	.col-md-1
+		%p=scan.eps
+	.col-md-1
+		%p=scan.ebitda
+	.col-md-1
+		%p=scan.marketcap
+	.col-md-1
+		%p
+	.col-md-1
+		%p
+	.col-md-1
+		%p
+	.col-md-1
+	.row
+		%p{class: "selector more-info scan-#{scan.id}", data: { scan_stock: "#{scan.stock}", scan_id: "#{scan.id}" }}More Info

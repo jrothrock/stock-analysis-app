@@ -1,0 +1,4 @@
+if(renderLoaded === 0) {
+		$('#weather-content').append("<%=j render 'forecasts/weather'%>")
+		renderLoaded = 1;
+}

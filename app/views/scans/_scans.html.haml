@@ -1,0 +1,29 @@
+.row.list
+	.col-md-1.first-block
+		%p Time Ago
+	.col-md-1
+		%p User
+	.col-md-1
+		%p Name
+	.col-md-1
+		%p Ticker
+	.col-md-1
+		%p Book Value
+	.col-md-1
+		%p EPS
+	.col-md-1
+		%p EBITDA
+	.col-md-1
+		%p Market Cap
+	.col-md-1
+		%p
+	.col-md-1
+		%p
+	.col-md-1
+		%p
+	.col-md-1
+		%p
+	
+
+-@scans.each do |scan|
+	= render 'scan', scan: scan
