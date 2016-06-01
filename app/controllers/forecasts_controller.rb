@@ -1,9 +1,11 @@
 class ForecastsController < ApplicationController
 	before_action :authenticate_user!
+	
 	def create
 
 		# Hardcoded for simplicity, but params could be passed in with a post request - only issue with this is that dyanmic params may not work with Wunderground's API
 		cities = [['co', 'Denver'], ['ca','San_Francisco'], ['il','Chicago'], ['ga', 'Atlanta'], ['tx','Dallas'], ['fl', 'Miami'], ['wa', 'Seattle'], ['ny','New_York'], ['ma', 'Boston']]
+		
 		temperatures = []
 		allAverageLows = []
 	    allAverageHighs = []

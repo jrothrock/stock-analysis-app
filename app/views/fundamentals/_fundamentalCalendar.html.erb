@@ -1,12 +1,19 @@
-<script type="text/javascript">            
-                var fxcalendar_config = {
-                      host: "http://calendar.fxstreet.com",
-                      eventurl: "./main_en-us.aspx", // your main calendar page
-                      culture: "en-us" // culture
-                                  };
-                                  console.log('loading...');
-        </script>
-        <script type="text/javascript" src="http://calendar.fxstreet.com/scripts/mini"></script>
-        <div id="fxst_calendar" style="width: 100%; margin-bottom: 15px"></div>
-
-
+<script type="text/javascript">
+            var fxcalendar_config = {
+                host: "http://calendar.fxstreet.com",
+            gridselector: "#fxst_grid",
+            filterselector: "#fxst_filter",
+            columns: "None",
+            showeventlink: "1", // if you want to disable event link, put a "0"
+            showcountrylink: "1",  // if you want to disable country link, put a "0"
+            culture: "en-us", // diplay culture
+            countryurl: "country_en-us.aspx?id=", // your own page
+            eventurl: "event_en-us.aspx?id=" // your own page
+            };
+        </script>        
+        <script type="text/javascript" src="http://calendar.fxstreet.com/scripts/main/?culture=en-us&version=0.0.1"></script>
+        <div id="Div1" style="width:100%;margin-top:10px;margin-bottom:10px">
+            <div id="fxst_filter"></div>
+            <hr />
+            <div id="fxst_grid"></div>
+        </div>                     

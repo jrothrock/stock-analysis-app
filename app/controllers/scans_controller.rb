@@ -1,6 +1,6 @@
 class ScansController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :fundamentals, :moreInfo]
-
+  
   def moreInfo
     data = {}
     dates = []
@@ -41,20 +41,21 @@ class ScansController < ApplicationController
       @temps = Forecast.last
 
       ##FOR FORECASTS
-      @denver = @temps['temperatures'][0]
-      @san_francisco = @temps['temperatures'][1]
-      @chicago = @temps['temperatures'][2]
-      @atlanta = @temps['temperatures'][3]
-      @dallas = @temps['temperatures'][4]
-      @miami = @temps['temperatures'][5]
-      @seattle = @temps['temperatures'][6]
-      @new_york = @temps['temperatures'][7]
-      @boston = @temps['temperatures'][8]
-      @averageLow = @temps['temperatures'][9]
-      @averageHigh = @temps['temperatures'][10]
-      @cities = [@san_francisco, @denver, @atlanta, @dallas, @chicago, @miami, @seattle, @new_york, @boston]
-
-      #This is a lot of db queries, with the majority of it being pointless ish. May want to make a new table for this.
+      if !!@temps
+        @denver = @temps['temperatures'][0]
+        @san_francisco = @temps['temperatures'][1]
+        @chicago = @temps['temperatures'][2]
+        @atlanta = @temps['temperatures'][3]
+        @dallas = @temps['temperatures'][4]
+        @miami = @temps['temperatures'][5]
+        @seattle = @temps['temperatures'][6]
+        @new_york = @temps['temperatures'][7]
+        @boston = @temps['temperatures'][8]
+        @averageLow = @temps['temperatures'][9]
+        @averageHigh = @temps['temperatures'][10]
+        @cities = [@san_francisco, @denver, @atlanta, @dallas, @chicago, @miami, @seattle, @new_york, @boston]
+      end
+       #This is a lot of db queries, with the majority of it being pointless ish. May want to make a new table for this.
       #Another possibility is to create a seperate column in forecast and set it to null if Forecast.all.length is less than 7.
       #This also ONLY works if there is a cronjob pulling the data daily.
 
@@ -90,7 +91,9 @@ class ScansController < ApplicationController
   end
 
 	def new
+
 		@scan = current_user.scans.build
+
 	end
 
 	def create
@@ -102,28 +105,38 @@ class ScansController < ApplicationController
     parsed = JSON.parse(response.body)
     Rails.logger.info "parsed====#{parsed}====="
   
-    if parsed['query']['results']['quote']['BookValue'] != nil
+    if !!parsed['query']['results'] && !!parsed['query']['results']['quote']['BookValue']
+    
+        info = []
 
-      s = Scan.new
-      
-      s.user_id = current_user.id
-      s.stock = stockTicker
-      s.name = parsed['query']['results']['quote']['Name']
-      s.bookvalue = parsed['query']['results']['quote']['BookValue']
-      s.eps = parsed['query']['results']['quote']['EarningsShare']
-      s.ebitda = parsed['query']['results']['quote']['EBITDA']
-      s.marketcap = parsed['query']['results']['quote']['MarketCapitalization']
-      if s.save
-        flash[:success] = "Your report has been generated!"
-        redirect_to root_path
-      else
-        flash[:alert] = "Something went wrong when generating your report, please try again."
-        render :new
-      end
+        info << parsed['query']['results']['quote']['Name']
+        info << stockTicker
+        info << parsed['query']['results']['quote']['Ask']
+        info << parsed['query']['results']['quote']['Change_PercentChange']
+        info << parsed['query']['results']['quote']['BookValue']
+        info << parsed['query']['results']['quote']['PriceBook']
+        info << parsed['query']['results']['quote']['EarningsShare']
+        info << parsed['query']['results']['quote']['EPSEstimateNextQuarter']
+        info << parsed['query']['results']['quote']['EBITDA']
+        info << parsed['query']['results']['quote']['MarketCapitalization']
+        info << parsed['query']['results']['quote']['AverageDailyVolume']
 
+        s = Scan.new
+        
+        s.user_id = current_user.id
+        s.stock = stockTicker
+        s.info = info
+
+        if s.save
+          flash[:success] = "Your report has been generated!"
+          redirect_to root_path
+        else
+          flash.now[:error] = "Something went wrong when generating your report, please try again."
+          render :new
+        end
     else
 
-      flash.now[:alert] = "Your new scan couldn't be created! Please make sure you entered a valid ticker."
+      flash.now[:error] = "Your new scan couldn't be created! Please make sure you entered a valid ticker."
       render :new
 
     end
@@ -153,6 +166,10 @@ class ScansController < ApplicationController
 	end
 
 	private
+
+  def set_scan
+    @scan = Scan.find(params[:id])
+  end
 
 	def scan_params
     	params.require(:scan).permit(:stock, :name, :bookvalue, :eps, :ebitda, :marketcap)

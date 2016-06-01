@@ -3,11 +3,13 @@
 This is the base code - isn't as thorough - of the app found on my personal site finance.jackrothrock.com; at the time of publishing this, it is not up. This repo/base is definitely a good starting point for a recreation, though.
 
 Notes:
-For the weather to work properly one needs to set up a cron job to pull the data everyday - or you can click new report, once, every day for the prior weeks forecast to be properly calculated - new report button only shows if the user is an admin, this can only be set in the rails console.
+For the weather to work properly, one needs to set up a cron job to pull the data everyday - or you can click new report, once, every day for the prior weeks forecast to be properly calculated - new report button only shows if the user is an admin, this can only be set in the rails console.
 
-I used the mini economic calender due to the the main one creating an alert - soooo annoying - if there is already a window property for the calendar. I haven't tested it, but one could probably null out the window property everytime turbolinks loads. 
+GENERATING A REPORT WONT WORK UNTIL YOU FILL IN THE API KEY FOUND IN THE FORECASTS CONTROLLER
 
 Didn't build it to look extremely great, or be responsive, but it uses bootstrap so these can be done quite easily.
+
+This requires postgres in development as it uses json database types.
 
 While I feel I shouldn't need to say it, I'M NOT RESPONSIBLE FOR ANY DAMANGES - INCLUDING BUT NOT LIMITED TO FINANCIAL LOSS THAT OCCURS WITH THE USE OF THIS APP. 
 

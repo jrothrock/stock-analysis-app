@@ -44,15 +44,19 @@ var App = {
   },
 
   flashInit: function(){
-    setTimeout(function(){
-      $('.flash').fadeOut();
-    }, 4000);
+    if (!(!(document.getElementById("flash")))){
+      var content = $('#flash').html();
+      var type = $('#flash').data("type");
+      var time = $('#flash').data("time");
+      notie.alert(type, content, time);
+      $('#flash').fadeOut();
+    }
   },
 
   afterChart: function(ScanId){
     $("#hider-" + ScanId).on("click", function(){
       $("#container" + ScanId).fadeOut(300, function() { $(this).remove(); });
-      $(".scan-" + ScanId).css({'visibility':'visible', 'margin-top': '0px'});
+      $(".scan-" + ScanId).css({'visibility':'visible'});
       $(this).remove();
     });
   },
@@ -106,9 +110,9 @@ var App = {
   
   graphInit: function(){
     $(".more-info").on("click", function(){
-      $(this).css({'visibility':'hidden', 'margin-top': '-20px'});
+      $(this).css({'visibility':'hidden'});
       var ScanID = $(this).data("scan-id");
-      $(this).parent().append("<div class='selector' id='hider-" + ScanID + "'><p>Hide This Ish</p></div>");
+      $(this).parent().append("<div class='selector' id='hider-" + ScanID + "'><p>Less Info</p></div>");
       $(this).parent().append("<div id='container" + ScanID + "' style='margin-bottom:10px'></div>");
       var ScanStock = $(this).data("scan-stock");
 
@@ -140,9 +144,13 @@ var App = {
     });
   },
 
+
   init: function(){
+    window.alert = function() {};
     renderLoaded = 0; //make this ish global
     fundamentalsLoaded = 0; //make this ish global
+    App.flashInit();
+    App.disableEnterForm();
     App.tabSlideIniter();
     App.tabSlide();
     App.graphInit();

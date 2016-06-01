@@ -1,26 +1,26 @@
-.row.list{class: "row-#{scan.id}" }
+.row.list.scans{class: "row-#{scan.id}" }
 	.col-md-1.first-block
 		%p=time_ago_in_words scan.created_at
 	.col-md-1
-		%p=scan.user.user_name
+		%p=scan.info[0]
 	.col-md-1
-		%p=scan.name
+		%p=scan.info[1]
 	.col-md-1.ticker
-		%p=scan.stock
+		%p=scan.info[2]
 	.col-md-1
-		%p=scan.bookvalue
+		%p=scan.info[3]
 	.col-md-1
-		%p=scan.eps
+		%p=scan.info[4]
 	.col-md-1
-		%p=scan.ebitda
+		%p=scan.info[5]
 	.col-md-1
-		%p=scan.marketcap
+		%p=scan.info[6]
 	.col-md-1
-		%p
+		%p=scan.info[7]
 	.col-md-1
-		%p
+		%p=scan.info[8]
 	.col-md-1
-		%p
+		%p=scan.info[9]
 	.col-md-1
-	.row
-		%p{class: "selector more-info scan-#{scan.id}", data: { scan_stock: "#{scan.stock}", scan_id: "#{scan.id}" }}More Info
+		%p=scan.info[10]
+	%p{class: "selector more-info scan-#{scan.id}", data: { scan_stock: "#{scan.stock}", scan_id: "#{scan.id}" }}More Info

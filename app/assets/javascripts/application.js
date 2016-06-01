@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require highcharts/highcharts-more
+//= require .//notie.js
 //= require .//scans.js
 //= require bootstrap-sprockets
 //= require .//forecasts.js

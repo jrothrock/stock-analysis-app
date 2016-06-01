@@ -1,4 +1,17 @@
 module ApplicationHelper
+	def alert_for(flash_type)
+		case flash_type
+		when "success" 
+			1
+		when "error"
+			3
+		when "alert"
+			2
+		when "notice"
+			4
+		end
+	end
+
 	def dateFormat(current, adjust)
 		return (current + adjust.days)
 	end
