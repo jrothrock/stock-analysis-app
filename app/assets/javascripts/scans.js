@@ -57,6 +57,7 @@ var App = {
     $("#hider-" + ScanId).on("click", function(){
       $("#container" + ScanId).fadeOut(300, function() { $(this).remove(); });
       $(".scan-" + ScanId).css({'visibility':'visible'});
+      $(this).parent().css({'border-bottom': '0px'});
       $(this).remove();
     });
   },
@@ -112,8 +113,9 @@ var App = {
     $(".more-info").on("click", function(){
       $(this).css({'visibility':'hidden'});
       var ScanID = $(this).data("scan-id");
+      $(this).parent().css({'border-bottom': '1px solid #aaa'});
       $(this).parent().append("<div class='selector' id='hider-" + ScanID + "'><p>Less Info</p></div>");
-      $(this).parent().append("<div id='container" + ScanID + "' style='margin-bottom:10px'></div>");
+      $(this).parent().after("<div id='container" + ScanID + "' style='margin-bottom:10px'></div>");
       var ScanStock = $(this).data("scan-stock");
 
     $.ajax({
@@ -134,9 +136,24 @@ var App = {
     });
   },
 
+  weatherClick: function(){
+    $('#weather-b').on("click", function(){
+      confirm = notie.confirm('Are you sure you want to? This data is collected automatically. Continuing may mess up the data calculations.', 'Yes', 'Cancel', function() {
+        notie.alert(4, 'Generating report. Due to API restrictions, this will take a couple of minutes...', 10);
+        $.ajax({
+          type: "POST",
+              url: "/forecasts",
+              body:{
+                "utf8" : "✓", 
+                 "commit" : "New Report"
+              }
+          });
+          });
+    });
+  },
+
   fundamentalClick: function(){
     $("#fundamentals-button").on("click", function(){
-      var tabName = $('#fundamentals').attr('id');
       $.ajax({
         type: "GET",
             url: "/fundamentals",
@@ -144,6 +161,20 @@ var App = {
     });
   },
 
+  backToTop: function() {
+    $(window).scroll(function(){
+      if ($(this).scrollTop() > 100) {
+        $('#back-to-top').fadeIn();
+      } else {
+        $('#back-to-top').fadeOut();
+      }
+    });
+    $('#back-to-top').on('click', function(e){
+      e.preventDefault();
+      $('html, body').animate({scrollTop : 0},1000);
+      return false;
+    });
+  },
 
   init: function(){
     window.alert = function() {};
@@ -154,7 +185,9 @@ var App = {
     App.tabSlideIniter();
     App.tabSlide();
     App.graphInit();
+    App.weatherClick();
     App.fundamentalClick();
+    App.backToTop();
   }
 };  
 

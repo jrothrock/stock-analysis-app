@@ -16,7 +16,7 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
+@import "font-awesome";
 
 #flash {
   visibility: hidden;
@@ -26,19 +26,19 @@
 
   &:first-child{
     margin-top: 10px;
-    border-top: 1px solid black;
   }
 	&:last-child{
 		margin-bottom: 20px;
+    border-bottom: 1px solid #aaa;
 	}
 	.col-md-1 {
 		height: 50px;
-		border-right: 1px solid black;
-		border-bottom: 1px solid black;
+    border-top:1px solid #aaa;
+		border-right: 1px solid #aaa;
 		overflow: hidden;
 	}
 	.first-block {
-		border-left: 1px solid black;
+		border-left: 1px solid #aaa;
 	}
 
 	p {
@@ -49,9 +49,8 @@
 
 .selector {
 	padding-left: 25px;
-	color: blue;
+	color: #999;
   float:right;
-  display:block;
   top: 33px;
   right: -65px;
   position: absolute;
@@ -59,7 +58,7 @@
 	&:hover {
 		cursor: pointer;
 		text-decoration: underline;
-		color:purple;
+		color: #428bca;
 	}
 }
 
@@ -116,22 +115,85 @@
   background: #428bca;
 }
 
+.pagination {
+  float: right;
+  text-align: center;
+  padding: 0.3em;
+  cursor: default; 
+}
+.pagination a, .pagination span, .pagination em {
+  padding: 0.2em 0.5em; 
+}
+.pagination .disabled {
+  color: #ddd; 
+}
+.pagination .current {
+  font-style: normal;
+  font-weight: bold;
+  color: #428bca; 
+}
+.pagination a {
+  border-radius: 10%;
+  border: 1px solid #dddddd;
+  color: #999;
+  text-decoration: none; 
+}
+.pagination a:hover, .pagination a:focus {
+  background: transparent;
+  border-color: #428bca;
+  color: #428bca;
+}
+.pagination .page_info {
+  color: #aaaaaa;
+  padding-top: 0.8em; 
+}
+.pagination .previous_page, .pagination .next_page {
+  border-width: 1px; 
+}
+.pagination .previous_page {
+  margin-right: 1em; 
+}
+.pagination .next_page {
+  margin-left: 1em; 
+}
+#back-to-top {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  background: rgba(66, 139, 202, 0.6);
+  color: #ffffff;
+  text-align: center;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  z-index: 1;
+  display: none;
+
+  &:hover {
+    background: rgb(66, 139, 202);
+  }
+  i {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+  }
+}
 .notie-transition {
   -moz-transition: all 0.3s ease;
   -webkit-transition: all 0.3s ease;
   transition: all 0.3s ease; }
 
 .notie-background-success {
-  background-color: #57BF57; }
+  background-color: #5cb85c; }
 
 .notie-background-warning {
   background-color: #D6A14D; }
 
 .notie-background-error {
-  background-color: #E1715B; }
+  background-color: #d9534f; }
 
 .notie-background-info {
-  background-color: #4D82D6; }
+  background-color: #5bc0de; }
 
 #notie-alert-outer, #notie-confirm-outer, #notie-input-outer, #notie-select-outer {
   position: fixed;
@@ -151,7 +213,9 @@
   box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5); }
   @media (max-width: 600px) {
     #notie-alert-outer, #notie-confirm-outer, #notie-input-outer, #notie-select-outer {
-      font-size: 18px; } }
+      font-size: 18px; 
+      }  
+  }
 
 #notie-alert-inner {
   padding: 20px;
@@ -173,7 +237,7 @@
   padding: 20px;
   display: block;
   cursor: default;
-  background-color: #4D82D6; }
+  background-color: #428bca; }
 
 #notie-confirm-text {
   color: #FFFFFF; }
@@ -190,11 +254,11 @@
   line-height: 50px;
   width: 50%;
   cursor: pointer;
-  background-color: #57BF57; }
+  background-color: #5cb85c; }
 
 #notie-confirm-no, #notie-input-no {
   float: right;
-  background-color: #E1715B; }
+  background-color: #d9534f; }
 
 #notie-confirm-background, #notie-input-background, #notie-select-background {
   position: fixed;
@@ -224,7 +288,8 @@
   font-size: 24px; }
   @media (max-width: 600px) {
     #notie-input-field {
-      font-size: 18px; } }
+      font-size: 18px; } 
+      }
 
 #notie-input-text {
   color: #FFFFFF; }

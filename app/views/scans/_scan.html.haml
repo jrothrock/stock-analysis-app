@@ -1,4 +1,4 @@
-.row.list.scans{class: "row-#{scan.id}" }
+.row.list.scans{class: "row-#{scan.id}", data: {scan: "#{scan.id}"} }
 	.col-md-1.first-block
 		%p=time_ago_in_words scan.created_at
 	.col-md-1

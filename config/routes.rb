@@ -7,8 +7,9 @@ Rails.application.routes.draw do
   resources :scans 
   
   get '/fundamentals', to: 'scans#fundamentals', as: 'fundamentals'
-  post '/forecasts', to: 'forecasts#create', as: 'forecasts'
+  post '/forecasts', to: 'forecasts#create', as: 'forecasts', defaults: { format: 'html' }
   post '/more-info', to: 'scans#moreInfo', as: 'moreInfo'
+  get '/users/edit', to: redirect('/')
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  devise :database_authenticatable, :validatable, password_length: 6..30
 
   has_many :scans
 end

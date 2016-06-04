@@ -25,11 +25,13 @@
 	    </div>
 	    <div role="tabpanel" class="tab-pane" id="fundamentals">
 	    	<div class="col-md-10 col-md-offset-1" id='fundamentals-content'>
-				 
+			
+
 			</div>
 	    </div>
 	  </div>
 	</row>
+
 <% flash.each do |name, msg| %>
           <%= content_tag :div, msg, class: [:alert, ""], id: 'flash', data: {type: alert_for(name), time: 2.5} %>
 <% end %>

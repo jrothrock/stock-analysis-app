@@ -7,11 +7,15 @@
 		= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
 		= javascript_include_tag 'head', 'data-turbolinks-track' => true
 		= csrf_meta_tags
-%body{id: 'mycanvas'}
+
+%body
 	= render 'layouts/partials/navbar'
 	= yield
 
-%footer{"data-no-turbolink" => ""}
+
+%footer
+	%a#back-to-top{:href => "#"}
+		%i.fa.fa-angle-up
 	= javascript_include_tag 'application', 'data-turbolinks-track' => true
 
 

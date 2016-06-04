@@ -8,7 +8,7 @@
 	.col-md-1
 		%p Ask
 	.col-md-1
-		%p Change
+		%p Day Change
 	.col-md-1
 		%p Book Value
 	.col-md-1
@@ -16,7 +16,7 @@
 	.col-md-1
 		%p EPS
 	.col-md-1
-		%p EPS Next Q Est.
+		%p Next EPS Q Est.
 	.col-md-1
 		%p EBITDA
 	.col-md-1
@@ -27,3 +27,5 @@
 
 -@scans.each do |scan|
 	= render 'scan', scan: scan
+
+= will_paginate @posts, class: 'pagination'
