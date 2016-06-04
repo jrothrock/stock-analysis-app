@@ -1,9 +1,18 @@
 == README
+What it does: 
+Stock Tab:
 
-This is the base code - isn't as thorough - of the app found on my personal site finance.jackrothrock.com; at the time of publishing this, it is not up. This repo/base is definitely a good starting point for a recreation, though.
+When tickers are submitted, rails goes and pulls stock information from yahoo and creates a graph with highgraphs. 
+
+Weather Tab:
+Grabs 10 day forecasts from 60 cities from around the world, and stores them. Then it compares the predictions to the actuals to compare whether analysts believe that it was hotter or cooler than expected. 
+
+Fundamentals Tab:
+Pulls an (http) *sigh* economic calendar that shows all fundamentals from fxstret.com
+Due to it being http, all browsers block it, so I won't publish this - current - version to heroku.
 
 Notes:
-For the weather to work properly, one needs to set up a cron job to pull the data everyday - or you can click new report, once, every day for the prior weeks forecast to be properly calculated - new report button only shows if the user is an admin, this can only be set in the rails console.
+For the weather to work properly, don't generate a new report - except maybe the first one - as whenever does this automatically.
 
 GENERATING A REPORT WONT WORK UNTIL YOU FILL IN THE API KEY FOUND IN THE FORECASTS CONTROLLER
 
