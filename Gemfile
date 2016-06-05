@@ -32,6 +32,7 @@ gem 'highcharts-rails'
 gem 'yahoo-finance'
 gem 'will_paginate', '3.0.6'
 gem 'whenever', :require => false
+gem 'font-awesome-rails'
 
 group :development, :test do
 	gem 'pg', '~> 0.15'
