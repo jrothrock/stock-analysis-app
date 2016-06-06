@@ -1,4 +1,5 @@
 class ForecastsController < ApplicationController
+	skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'html' }
 	
 	def create
 
@@ -71,13 +72,14 @@ class ForecastsController < ApplicationController
 		   				regionHigh << averageHigh
 
 				   		temperatures << [currentCity,highs,lows,averageLow,averageHigh]
-				   		
-				   		puts "block completed"
+				   	
 
 					end
-					puts "region completed"
+					puts "block completed"
 				end
-				
+
+				puts "region completed"
+
 				if regionKey == 0
 					naCitiesLow = (regionLow.sum / regionLow.length)
 					naCitiesHigh = (regionHigh.sum / regionHigh.length)

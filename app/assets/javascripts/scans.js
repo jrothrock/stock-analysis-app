@@ -57,8 +57,15 @@ var App = {
     $("#hider-" + ScanId).on("click", function(){
       $("#container" + ScanId).fadeOut(300, function() { $(this).remove(); });
       $(".scan-" + ScanId).css({'visibility':'visible'});
-      $(this).parent().css({'border-bottom': '0px'});
+      console.log($('.scans').last().data('scan') + "blah");
+      console.log($(this).parent().data('scan'));
+      var $parent = $(this).parent();
       $(this).remove();
+      setTimeout(function() { 
+        if (($('.scans').last().data('scan')) != $parent.data('scan')){
+          $parent.css({'border-bottom': '0px'});
+        }
+      }, 300);
     });
   },
 
@@ -176,6 +183,31 @@ var App = {
     });
   },
 
+  cssRecurse: function(number){
+  numbers = [];
+  function Recur(num){
+    newNum = num - 14;
+    if(newNum  >  0){
+      numbers.push(newNum);
+      Recur(newNum);
+    }
+     return false;
+  }
+  Recur(number);
+  return numbers;
+ },
+
+  addCss: function(){
+    var pagination = parseInt($('.scans').first().data('scan'));
+    var elements = App.cssRecurse(pagination);
+    $.each(elements, function(key,value){
+      if(!!$("div[data-scan='" + value +"']")){
+        $("div[data-scan='" + value +"']").css({"border-bottom": "1px solid #999"});
+      }
+    });
+    $('.scans').last().css({"border-bottom": "1px solid #999"});
+  },
+
   init: function(){
     window.alert = function() {};
     renderLoaded = 0; //make this ish global
@@ -188,6 +220,7 @@ var App = {
     App.weatherClick();
     App.fundamentalClick();
     App.backToTop();
+    App.addCss();
   }
 };  
 
