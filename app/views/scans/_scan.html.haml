@@ -1,26 +1,26 @@
 .row.list.scans{class: "row-#{scan.id}", data: {scan: "#{scan.id}"} }
-	.col-md-1.first-block
+	.col-xs-2.col-md-1.first-block
 		%p=time_ago_in_words scan.created_at
-	.col-md-1
+	.col-xs-2.col-md-1
 		%p=scan.info[0]
-	.col-md-1
+	.col-xs-2.col-md-1
 		%p=scan.info[1]
-	.col-md-1.ticker
+	.col-xs-2.col-md-1.ticker
 		%p=scan.info[2]
-	.col-md-1
+	.col-xs-2.col-md-1
 		%p=scan.info[3]
-	.col-md-1
+	.col-xs-2.col-md-1
 		%p=scan.info[4]
-	.col-md-1
+	.col-xs-2.col-md-1.ptb
 		%p=scan.info[5]
-	.col-md-1
+	.col-xs-2.col-md-1
 		%p=scan.info[6]
-	.col-md-1
+	.col-xs-2.col-md-1
 		%p=scan.info[7]
-	.col-md-1
+	.col-xs-2.col-md-1
 		%p=scan.info[8]
-	.col-md-1
+	.col-xs-2.col-md-1
 		%p=scan.info[9]
-	.col-md-1
+	.col-xs-2.col-md-1
 		%p=scan.info[10]
 	%p{class: "selector more-info scan-#{scan.id}", data: { scan_stock: "#{scan.stock}", scan_id: "#{scan.id}" }}More Info

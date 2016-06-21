@@ -18,6 +18,21 @@
 @import "bootstrap";
 @import "font-awesome";
 
+
+@mixin breakpoint($point) {
+  @if $point == xl {
+    @media (min-width: 1021px) { @content; }
+  }
+  @else if $point == s {
+    @media (max-width: 1020px) { @content; }
+  }
+}
+
+.scans{
+  @include breakpoint(s) {
+   margin-top: 40px;
+  }
+}
 #flash {
   visibility: hidden;
 }
@@ -27,10 +42,16 @@
   &:first-child{
     margin-top: 10px;
   }
-	&:last-child{
-		margin-bottom: 20px;
+  @include breakpoint(xl) {
+      &:last-child{
+      margin-bottom: 20px;
+      border-bottom: 1px solid #aaa;
+      }
+  }
+  @include breakpoint(s) {
+    margin-bottom: 20px;
     border-bottom: 1px solid #aaa;
-	}
+  }
 	.col-md-1 {
 		height: 50px;
     border-top:1px solid #aaa;
@@ -46,13 +67,15 @@
 	}
 
 }
+.city-name{
+  @include breakpoint(s) {
+    font-size:14px;
+  }
 
+}
 .selector {
 	padding-left: 25px;
 	color: #999;
-  float:right;
-  top: 33px;
-  right: -65px;
   position: absolute;
 	
 	&:hover {
@@ -60,6 +83,16 @@
 		text-decoration: underline;
 		color: #428bca;
 	}
+   @include breakpoint(xl) {
+   float:right;
+   top: 33px;
+   right: -65px;
+  }
+  @include breakpoint(s) {
+   float:right;
+   top: 105px;
+   right: 0px;
+  }
 }
 
 .nav-tabs {
@@ -74,6 +107,9 @@
 		*display:inline; /* ie7 fix */
 		zoom:1; /* hasLayout ie7 trigger */
 	}
+  @include breakpoint(s) {
+   font-size: 20px;
+  }
 }
 
 
@@ -83,6 +119,7 @@
 .nav-tabs > li.active > a:hover {
   border-width: 0;
   outline: 0;
+  background-color: transparent;
 }
 
 .nav-tabs > li > a {
@@ -176,6 +213,11 @@
     width: 30px;
     height: 30px;
     line-height: 30px;
+  }
+}
+.ptb{
+  @include breakpoint(s) {
+   border-left: 1px solid #aaa;
   }
 }
 .notie-transition {
@@ -323,3 +365,6 @@
   color: #FFFFFF;
   cursor: pointer;
   background-color: #A0A0A0; }
+.weather-data > .col-xs-1{
+  overflow:hidden;
+}

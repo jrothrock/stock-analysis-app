@@ -3,7 +3,7 @@
     %h2.text-center Scan a stock
     %br
     .post
-      .post-body
+      .post-body.col-xs-8.col-xs-offset-2.col-md-12.col-md-offset-0
         = simple_form_for @scan ||= Scan.new, id: 'scan-form' do |f|
           .row
             .col-md-12.text-center

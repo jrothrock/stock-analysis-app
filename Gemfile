@@ -23,6 +23,7 @@ gem 'turbolinks', '~> 5.0.0.beta'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'pg', '~> 0.15'
 gem 'haml', '~> 4.0.6'
 gem 'simple_form', '~> 3.1.0'
 gem 'bootstrap-sass', '~> 3.3.3'
@@ -35,16 +36,16 @@ gem 'whenever', :require => false
 gem 'font-awesome-rails'
 
 group :development, :test do
-	gem 'pg', '~> 0.15'
+  gem 'pry-rails'
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
-
+  gem "better_errors"
   gem 'capybara', '~> 2.4.4'
   gem 'rspec-rails', '~> 3.3.0'
   gem 'factory_girl_rails'
 end
+
 group :production do
-	gem 'pg', '~> 0.15'
 	gem 'rails_12factor'
 end

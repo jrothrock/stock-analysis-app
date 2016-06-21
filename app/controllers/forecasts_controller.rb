@@ -75,7 +75,7 @@ class ForecastsController < ApplicationController
 				   	
 
 					end
-					puts "block completed"
+
 				end
 
 				puts "region completed"

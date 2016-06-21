@@ -57,12 +57,10 @@ var App = {
     $("#hider-" + ScanId).on("click", function(){
       $("#container" + ScanId).fadeOut(300, function() { $(this).remove(); });
       $(".scan-" + ScanId).css({'visibility':'visible'});
-      console.log($('.scans').last().data('scan') + "blah");
-      console.log($(this).parent().data('scan'));
       var $parent = $(this).parent();
       $(this).remove();
       setTimeout(function() { 
-        if (($('.scans').last().data('scan')) != $parent.data('scan')){
+        if (($('.scans').last().data('scan')) != $parent.data('scan') && $width >= 1100){
           $parent.css({'border-bottom': '0px'});
         }
       }, 300);
@@ -120,9 +118,13 @@ var App = {
     $(".more-info").on("click", function(){
       $(this).css({'visibility':'hidden'});
       var ScanID = $(this).data("scan-id");
-      $(this).parent().css({'border-bottom': '1px solid #aaa'});
       $(this).parent().append("<div class='selector' id='hider-" + ScanID + "'><p>Less Info</p></div>");
-      $(this).parent().after("<div id='container" + ScanID + "' style='margin-bottom:10px'></div>");
+      if($width >= 1100){
+        $(this).parent().css({'border-bottom': '1px solid #aaa'});
+        $(this).parent().after("<div id='container" + ScanID + "' style='margin-bottom:10px'></div>");
+      }else{
+        $(this).parent().after("<div id='container" + ScanID + "' style='margin-bottom:10px;margin-top:20px'></div>");
+      }
       var ScanStock = $(this).data("scan-stock");
 
     $.ajax({
@@ -170,7 +172,7 @@ var App = {
 
   backToTop: function() {
     $(window).scroll(function(){
-      if ($(this).scrollTop() > 100) {
+      if ($(this).scrollTop() > 100 && $width >= 1100) {
         $('#back-to-top').fadeIn();
       } else {
         $('#back-to-top').fadeOut();
@@ -212,6 +214,7 @@ var App = {
     window.alert = function() {};
     renderLoaded = 0; //make this ish global
     fundamentalsLoaded = 0; //make this ish global
+    $width = window.outerWidth; 
     App.flashInit();
     App.disableEnterForm();
     App.tabSlideIniter();

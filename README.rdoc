@@ -22,8 +22,6 @@ For the weather to work properly, don't generate a new report - except maybe the
 
 GENERATING A REPORT WONT WORK UNTIL YOU FILL IN THE API KEY FOUND IN THE FORECASTS CONTROLLER
 
-Didn't build it to look extremely great, or be responsive, but it uses bootstrap so these can be done quite easily.
-
 This requires postgres in development as it uses json database types.
 
 While I feel I shouldn't need to say it, I'M NOT RESPONSIBLE FOR ANY DAMANGES - INCLUDING BUT NOT LIMITED TO FINANCIAL LOSS THAT OCCURS WITH THE USE OF THIS APP. 

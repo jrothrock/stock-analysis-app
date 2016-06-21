@@ -3,10 +3,11 @@
 		%title Flare Suite
 		%meta{:charset => "utf-8"}
 		%meta{"http-equiv" => "X-UA-Compatible", :content => "IE=edge"}
-		%meta{:name => "viewport", :content => "width=device-width, initial-scale=1"}
+		%meta{:name => "viewport", :content => "width=1280"}
 		= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
 		= javascript_include_tag 'head', 'data-turbolinks-track' => true
 		= csrf_meta_tags
+		<meta name=viewport content='width=700'>
 
 %body
 	= render 'layouts/partials/navbar'
@@ -16,6 +17,10 @@
 %footer
 	%a#back-to-top{:href => "#"}
 		%i.fa.fa-angle-up
+	-if current_user
+		:javascript
+			window.CURRENT_USER_ID = #{current_user.id};
+
 	= javascript_include_tag 'application', 'data-turbolinks-track' => true
 
 
