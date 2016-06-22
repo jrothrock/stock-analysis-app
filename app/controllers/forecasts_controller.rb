@@ -35,7 +35,6 @@ class ForecastsController < ApplicationController
 	    wKey = ''
 	    begin
 		    blocks.each_with_index do |region, key|
-		    	regionKey = key
 		    	regionLow = []
 		    	regionHigh = []
 		    	region.each_with_index do |block, key|
@@ -80,10 +79,10 @@ class ForecastsController < ApplicationController
 
 				puts "region completed"
 
-				if regionKey == 0
+				if key == 0
 					naCitiesLow = (regionLow.sum / regionLow.length)
 					naCitiesHigh = (regionHigh.sum / regionHigh.length)
-				elsif regionKey == 1
+				elsif key == 1
 					europeanCitiesLow = (regionLow.sum / regionLow.length)
 					europeanCitiesHigh = (regionHigh.sum / regionHigh.length)
 				else 
@@ -91,6 +90,7 @@ class ForecastsController < ApplicationController
 					asianCitiesHigh = (regionHigh.sum / regionHigh.length)
 				end
 			end
+			
 		rescue => e
 			flash[:error] = "Something went wrong when generating the forecast"
 			redirect_to root_path

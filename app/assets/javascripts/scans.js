@@ -7,15 +7,23 @@ var App = {
     });
   },
 
-  tabSlide: function() {
-    if (!(!(document.getElementById("category_tabs")))){
-      $('#category_tabs').append("<li id='magic-line'></li>");
-      var $magicLine = $("#magic-line");
-      $magicLine
+  tabSlideVars: function($magicLine){
+    $magicLine
         .width($(".active").width())
         .css({"left": $(".active a").position().left, "visibility":'visible'})
         .data("origLeft", $magicLine.position().left)
         .data("origWidth", $magicLine.width());
+  },
+
+  tabSlide: function() {
+    if (!(!(document.getElementById("category_tabs")))){
+      $('#category_tabs').append("<li id='magic-line'></li>");
+      var $magicLine = $("#magic-line");
+      $('.active').css({'border-bottom': 'none'});
+      App.tabSlideVars($magicLine);
+      $(window).resize(function() {
+        App.tabSlideVars($magicLine);
+      });
       $("#category_tabs li").find("a").hover(function() {
         $el = $(this);
         leftPos = $el.position().left;
