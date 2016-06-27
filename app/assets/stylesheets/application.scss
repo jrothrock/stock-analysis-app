@@ -23,6 +23,12 @@
   @if $point == xl {
     @media (min-width: 1026px) { @content; }
   }
+  @else if $point == ls {
+    @media (max-width: 1025px) and (orientation: landscape) { @content;}
+  } 
+  @else if $point == p {
+    @media (orientation: portrait) { @content;}
+  }
   @else if $point == s {
     @media (max-width: 1025px) { @content; }
   }
@@ -36,7 +42,9 @@
   -ms-transition: transform .5s ease-in-out;
   -o-transition: transform .5s ease-in-out;
   transition: transform .5s ease-in-out;
-
+  @include breakpoint(ls) {
+   zoom: 0.6;
+  }
 }
 .portrait{
   zoom: 0.8;
@@ -65,32 +73,34 @@
       }
   }
   @include breakpoint(s) {
-    margin-bottom: 20px;
+    margin-bottom: 50px;
     border-bottom: 1px solid #aaa;
   }
-  &:nth-child(15){
-    border-bottom: 1px solid #aaa;
-  }
-	.col-md-1 {
-		height: 50px;
+  .col-md-1 {
+    height: 50px;
     border-top:1px solid #aaa;
-		border-right: 1px solid #aaa;
-		overflow: hidden;
-	}
-	.first-block {
-		border-left: 1px solid #aaa;
-	}
+    border-right: 1px solid #aaa;
+    overflow: hidden;
+  }
+  .first-block {
+    border-left: 1px solid #aaa;
+  }
 
-	p {
-		margin-left:-10px;
-	}
+  p {
+    margin-left:-10px;
+  }
 
 }
 .city-name{
   @include breakpoint(s) {
-    font-size:14px;
+    font-size:24px;
   }
 
+}
+.tab-content{
+  @include breakpoint(s) {
+   font-size: 20px;
+  }
 }
 .nav-push{
     @include breakpoint(xl) {
@@ -101,8 +111,8 @@
     position: relative;
     float: right;
     margin-right: 25px;
-    padding: 9px 10px;
-    margin-top: 10px;
+    padding: 12px 12px;
+    margin-top: 15px;
     margin-bottom: 8px;
     background-color: transparent;
     background-image: none;
@@ -231,15 +241,15 @@
   }
 }
 .selector {
-	padding-left: 25px;
-	color: #999;
+  padding-left: 25px;
+  color: #999;
   position: absolute;
-	
-	&:hover {
-		cursor: pointer;
-		text-decoration: underline;
-		color: #428bca;
-	}
+  
+  &:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #428bca;
+  }
    @include breakpoint(xl) {
    float:right;
    top: 33px;
@@ -253,19 +263,19 @@
 }
 
 .nav-tabs {
-	border-bottom: 1px solid #ddd;
-	text-align:center;
+  border-bottom: 1px solid #ddd;
+  text-align:center;
 
-  	li {
-		margin-bottom: 0;
-		position: initial;
-		float:none;
-		display:inline-block;
-		*display:inline; /* ie7 fix */
-		zoom:1; /* hasLayout ie7 trigger */
-	}
+    li {
+    margin-bottom: 0;
+    position: initial;
+    float:none;
+    display:inline-block;
+    *display:inline; /* ie7 fix */
+    zoom:1; /* hasLayout ie7 trigger */
+  }
   @include breakpoint(s) {
-   font-size: 20px;
+   font-size: 24px;
   }
 }
 
@@ -281,7 +291,17 @@
   outline: 0;
   background-color: transparent;
 }
-
+.navbar{
+  @include breakpoint(s) {
+    min-height: 60px;
+  }
+}
+.navbar-brand{
+  @include breakpoint(s) {
+   font-size: 25px;
+   margin-top: 5px;
+  }
+}
 .nav-tabs > li > a {
   border: none;
   color: #999;
@@ -316,10 +336,17 @@
   float: right;
   text-align: center;
   padding: 0.3em;
-  cursor: default; 
+  cursor: default;
+  @include breakpoint(s) {
+   font-size: 18px;
+   width: 100%;
+  }
 }
 .pagination a, .pagination span, .pagination em {
   padding: 0.2em 0.5em; 
+  @include breakpoint(s) {
+   margin-right: 15px;
+ }
 }
 .pagination .disabled {
   color: #ddd; 
