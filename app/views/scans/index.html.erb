@@ -1,12 +1,12 @@
 	<row>
 		<div class='col-md-10 col-md-offset-1'>
 		 <ul class="nav nav-tabs" role="tablist" id='category_tabs'>
-		    <li role="presentation" class="active"><a href="#reports" aria-controls="reports" role="tab" data-toggle="tab">Reports</a></li>
-		    <li role="presentation"><%= link_to 'Weather', '#weather', role: :tab,
+		    <li role="presentation" class="active"><a href="#reports" aria-controls="reports" role="tab" data-toggle="tab" class='reports'>Reports</a></li>
+		    <li role="presentation"><%= link_to 'Weather', '#weather', role: :tab, class: 'weather',
 	          data: { toggle: :tab },
 	          aria: { controls: :reports },
 	          remote: true %></li>
-		    <li role="presentation"><%= link_to 'Fundamentals', '#fundamentals', id: 'fundamentals-button', role: :tab, data: { toggle: :tab }, aria: { controls: :fundamentals }, remote: true %></li>
+		    <li role="presentation"><%= link_to 'Fundamentals', '#fundamentals', id: 'fundamentals-button', role: :tab, class: 'fundamentals', data: { toggle: :tab }, aria: { controls: :fundamentals }, remote: true %></li>
 		  </ul>
 		</div>
 	</row>

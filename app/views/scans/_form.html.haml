@@ -1,19 +1,18 @@
-.row
-  .posts-wrapper.col-md-4.col-md-offset-4
-    %h2.text-center Scan a stock
-    %br
-    .post
-      .post-body.col-xs-8.col-xs-offset-2.col-md-12.col-md-offset-0
-        = simple_form_for @scan ||= Scan.new, id: 'scan-form' do |f|
-          .row
-            .col-md-12.text-center
-              = f.error_notification
-            .container-fluid
-              .form-group.text-center
-                = f.input :stock, required: true, label: false, placeholder: 'Must enter a ticker symbol', class: 'stock-input'
-              .form-group.text-center
-                = f.button :submit, class: 'btn-success btn-block'
+.posts-wrapper.col-md-4.col-md-offset-4
+  %h2.text-center Scan a stock
+  %br
+  .post
+    .post-body.col-xs-8.col-xs-offset-2.col-md-12.col-md-offset-0
+      = simple_form_for @scan ||= Scan.new, id: 'scan-form' do |f|
+        .row
+          .col-md-12.text-center
+            = f.error_notification
+          .container-fluid
+            .form-group.text-center
+              = f.input :stock, required: true, label: false, placeholder: 'Must enter a ticker symbol', class: 'stock-input'
+            .form-group.text-center
+              = f.button :submit, class: 'btn-success btn-block'
 
-.row
-  -flash.each do |name, msg| 
-    = content_tag :div, msg, class: [:alert, ""], id: 'flash', data: {type: alert_for(name), time: 3}
+
+-flash.each do |name, msg| 
+  = content_tag :div, msg, class: [:alert, ""], id: 'flash', data: {type: alert_for(name), time: 3}

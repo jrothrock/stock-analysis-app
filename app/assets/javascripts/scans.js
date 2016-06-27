@@ -1,13 +1,17 @@
+/*
+  Personally, I believe that switching between function() and () => can be confusing - in reference to the jQuery callbacks. 
+  Regardless, I used arrow functions in callbacks where scoping was irrelevant. 
+*/
 var App = {
 
-  tabSlideIniter: function(){
-    $('.nav-tabs li').on('shown.bs.tab', function() {
+  tabSlideSwitcher(){
+    $('.nav-tabs li').on('shown.bs.tab', () => {
       $('#magic-line').remove();
       App.tabSlide();
     });
   },
 
-  tabSlideVars: function($magicLine){
+  tabSlideVars($magicLine){
     $magicLine
         .width($(".active").width())
         .css({"left": $(".active a").position().left, "visibility":'visible'})
@@ -15,13 +19,13 @@ var App = {
         .data("origWidth", $magicLine.width());
   },
 
-  tabSlide: function() {
-    if (!(!(document.getElementById("category_tabs")))){
+  tabSlide(){
+    if (document.getElementById("category_tabs")){
       $('#category_tabs').append("<li id='magic-line'></li>");
-      var $magicLine = $("#magic-line");
+      const $magicLine = $("#magic-line");
       $('.active').css({'border-bottom': 'none'});
       App.tabSlideVars($magicLine);
-      $(window).resize(function() {
+      $(window).resize(() => {
         App.tabSlideVars($magicLine);
       });
       $("#category_tabs li").find("a").hover(function() {
@@ -32,7 +36,7 @@ var App = {
           left: leftPos,
           width: newWidth
         });
-      }, function() {
+      }, () => {
         $magicLine.stop().animate({
           left: $magicLine.data("origLeft"),
           width: $magicLine.data("origWidth")
@@ -41,9 +45,9 @@ var App = {
     }
   },
 
-  disableEnterForm: function(){
-    $('#scan_stock').on('keyup keypress', function(e) {
-      var keyCode = e.keyCode || e.which;
+  disableEnterForm(){
+    $('#scan_stock').on('keyup keypress', (e) => {
+      const keyCode = e.keyCode || e.which;
       if (keyCode === 13) { 
         e.preventDefault();
         return false;
@@ -51,31 +55,31 @@ var App = {
     });
   },
 
-  flashInit: function(){
-    if (!(!(document.getElementById("flash")))){
-      var content = $('#flash').html();
-      var type = $('#flash').data("type");
-      var time = $('#flash').data("time");
+  flashInit(){
+    if (document.getElementById("flash")){
+      const content = $('#flash').html();
+      const type = $('#flash').data("type");
+      const time = $('#flash').data("time");
       notie.alert(type, content, time);
       $('#flash').fadeOut();
     }
   },
 
-  afterChart: function(ScanId){
+    afterChart(ScanId){
     $("#hider-" + ScanId).on("click", function(){
       $("#container" + ScanId).fadeOut(300, function() { $(this).remove(); });
       $(".scan-" + ScanId).css({'visibility':'visible'});
-      var $parent = $(this).parent();
+      const $parent = $(this).parent();
       $(this).remove();
-      setTimeout(function() { 
-        if (($('.scans').last().data('scan')) != $parent.data('scan') && $width >= 1100){
+      setTimeout(() => { 
+        if (($('.scans').last().data('scan')) !== $parent.data('scan') && $width >= 1100){
           $parent.css({'border-bottom': '0px'});
         }
       }, 300);
     });
   },
 
-  createGraphs: function(data, stockName, id){
+  createGraphs(data, stockName, id){
           window.chart = new Highcharts.Chart({
             chart: {
               renderTo: 'container' + id
@@ -122,18 +126,18 @@ var App = {
           App.afterChart(id);
   },
   
-  graphInit: function(){
+  graphInit(){
     $(".more-info").on("click", function(){
       $(this).css({'visibility':'hidden'});
-      var ScanID = $(this).data("scan-id");
-      $(this).parent().append("<div class='selector' id='hider-" + ScanID + "'><p>Less Info</p></div>");
+      const ScanID = $(this).data("scan-id");
+      $(this).parent().append(`<div class='selector' id='hider-${ScanID}'><p>Less Info</p></div>`);
       if($width >= 1100){
         $(this).parent().css({'border-bottom': '1px solid #aaa'});
-        $(this).parent().after("<div id='container" + ScanID + "' style='margin-bottom:10px'></div>");
+        $(this).parent().after(`<div id='container${ScanID}' style='margin-bottom:10px'></div>`);
       }else{
-        $(this).parent().after("<div id='container" + ScanID + "' style='margin-bottom:10px;margin-top:20px'></div>");
+        $(this).parent().after(`<div id='container${ScanID}' style='margin-bottom:10px;margin-top:20px'></div>`);
       }
-      var ScanStock = $(this).data("scan-stock");
+      const ScanStock = $(this).data("scan-stock");
 
     $.ajax({
       type: "POST",
@@ -141,10 +145,10 @@ var App = {
           data: {
             stock: ScanStock 
           },
-          success: function(data, textStatus, jqXHR){
+          success(data, textStatus, jqXHR){
             App.createGraphs(data, ScanStock, ScanID);
           },
-        error: function(xhr, textStatus, error){
+        error(xhr, textStatus, error){
           console.log(xhr.statusText);
           console.log(textStatus);
           console.log(error);
@@ -153,9 +157,9 @@ var App = {
     });
   },
 
-  weatherClick: function(){
-    $('#weather-b').on("click", function(){
-      confirm = notie.confirm('Are you sure you want to? This data is collected automatically. Continuing may mess up the data calculations.', 'Yes', 'Cancel', function() {
+  weatherClick(){
+    $('#weather-b').on("click", () => {
+      confirm = notie.confirm('Are you sure you want to? This data is collected automatically. Continuing may mess up the data calculations.', 'Yes', 'Cancel', () => {
         notie.alert(4, 'Generating report. Due to API restrictions, this will take a couple of minutes...', 10);
         $.ajax({
           type: "POST",
@@ -165,12 +169,12 @@ var App = {
                  "commit" : "New Report"
               }
           });
-          });
+        });
     });
   },
 
-  fundamentalClick: function(){
-    $("#fundamentals-button").on("click", function(){
+  fundamentalClick(){
+    $("#fundamentals-button").on("click", () => {
       $.ajax({
         type: "GET",
             url: "/fundamentals",
@@ -178,7 +182,7 @@ var App = {
     });
   },
 
-  backToTop: function() {
+  backToTop() {
     $(window).scroll(function(){
       if ($(this).scrollTop() > 100 && $width >= 1100) {
         $('#back-to-top').fadeIn();
@@ -186,17 +190,17 @@ var App = {
         $('#back-to-top').fadeOut();
       }
     });
-    $('#back-to-top').on('click', function(e){
+    $('#back-to-top').on('click', (e) => {
       e.preventDefault();
       $('html, body').animate({scrollTop : 0},1000);
       return false;
     });
   },
 
-  cssRecurse: function(number){
-  numbers = [];
+  cssRecurse(number){
+  const numbers = [];
   function Recur(num){
-    newNum = num - 14;
+    let newNum = num - 14;
     if(newNum  >  0){
       numbers.push(newNum);
       Recur(newNum);
@@ -207,31 +211,56 @@ var App = {
   return numbers;
  },
 
-  addCss: function(){
-    var pagination = parseInt($('.scans').first().data('scan'));
-    var elements = App.cssRecurse(pagination);
-    $.each(elements, function(key,value){
-      if(!!$("div[data-scan='" + value +"']")){
-        $("div[data-scan='" + value +"']").css({"border-bottom": "1px solid #999"});
+  addCss(){
+    const pagination = parseInt($('.scans').first().data('scan'));
+    const elements = App.cssRecurse(pagination);
+    $.each(elements, (key,value) => {
+      if($(`div[data-scan="${value}"]`)){
+        $(`div[data-scan="${value}"]`).css({"border-bottom": "1px solid #999"});
       }
     });
     $('.scans').last().css({"border-bottom": "1px solid #999"});
   },
 
-  init: function(){
-    window.alert = function() {};
-    renderLoaded = 0; //make this ish global
-    fundamentalsLoaded = 0; //make this ish global
+  mobileMenu(){
+    $('.nav-selector').on('click tap', () => {
+
+      if(!($('.main').hasClass('active-elm'))){
+        $('.main').addClass('active-elm');
+        $(".pushed").addClass('active-push');
+      }else{
+        setTimeout(() => { 
+          $('.main').removeClass('active-elm');
+          $(".pushed").removeClass('active-push');
+        }, 500);
+      }
+
+      $('.main').toggleClass('move-to-right');
+    });
+    $(window).resize(() => {
+      $('.main').removeClass('move-to-right');
+    });
+  },
+
+  init(){
+    window.alert = function(){};
+    //renderLoaded, fundamentalsLoaded, and $width are global
+    renderLoaded = 0; 
+    fundamentalsLoaded = 0; 
     $width = window.outerWidth; 
     App.flashInit();
     App.disableEnterForm();
-    App.tabSlideIniter();
+    App.tabSlideSwitcher();
     App.tabSlide();
     App.graphInit();
     App.weatherClick();
     App.fundamentalClick();
     App.backToTop();
     App.addCss();
+    App.mobileMenu();
+    $(window).resize(() => {
+      $width = window.outerWidth; 
+    });
   }
 };  
 

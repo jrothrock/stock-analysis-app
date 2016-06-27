@@ -192,18 +192,18 @@ class ScansController < ApplicationController
         #GET European Averages
         data.length.times do |i|
           20.times do |c|
-            eutimes = c + 20
-            currentEHighs << data[i]['temperatures'][eutimes][1][0].to_i
-            currentELows << data[i]['temperatures'][eutimes][2][0].to_i
+            c += 20
+            currentEHighs << data[i]['temperatures'][c][1][0].to_i
+            currentELows << data[i]['temperatures'][c][2][0].to_i
           end
         end
 
         #GET Asian Averages
         data.length.times do |i|
           20.times do |c|
-            asiantimes = c + 40
-            currentAHighs << data[i]['temperatures'][asiantimes][1][0].to_i
-            currentALows << data[i]['temperatures'][asiantimes][2][0].to_i
+            c += 40
+            currentAHighs << data[i]['temperatures'][c][1][0].to_i
+            currentALows << data[i]['temperatures'][c][2][0].to_i
           end
         end
 

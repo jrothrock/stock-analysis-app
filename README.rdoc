@@ -6,7 +6,7 @@ https://stock-trading-app.herokuapp.com/
 
 Stock Tab:
 
-When tickers are submitted, rails goes and pulls stock information from Yahoo and creates a graph of the opening, and closing, prices with highcharts. 
+When tickers are submitted, Rails goes and pulls stock information from Yahoo and creates a graph of the opening, and closing, prices with highcharts. 
 
 Weather Tab:
 
@@ -14,22 +14,13 @@ Grabs 10 day forecasts from 60 cities from around the world. It then compares th
 
 Fundamentals Tab:
 
-Pulls an (http) economic calendar that shows all fundamentals from fxstret.com, therefore, it won't show up on Heroku.
+Pulls an (http) economic calendar that shows all fundamentals from fxstret.com. Therefore, it won't show up on Heroku.
 
-Notes:
 
-For the weather to work properly, don't generate a new report - except maybe the first one - as whenever does this automatically.
 
-GENERATING A REPORT WONT WORK UNTIL YOU FILL IN THE API KEY FOUND IN THE FORECASTS CONTROLLER
 
-This requires postgres in development, as it uses json database types.
+
 
 While I feel I shouldn't need to say it, I'M NOT RESPONSIBLE FOR ANY DAMANGES - INCLUDING, BUT NOT LIMITED TO, FINANCIAL LOSS THAT OCCURS WITH THE USE OF THIS APP. 
 
 This code is released under the WTFPL (Do What the Fuck You Want) license.
-
-Credits:
-
-http://codepen.io/SkyHyzer/pen/wKwKvp
-
-https://github.com/ashvarma1982/stocks_app_real_time

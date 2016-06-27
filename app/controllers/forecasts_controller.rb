@@ -1,9 +1,13 @@
 class ForecastsController < ApplicationController
 	skip_before_filter :verify_authenticity_token, :if => Proc.new { |c| c.request.format == 'html' }
 	
+	## The create function is looping through every city and doing an api call to wunderground to grab the 10 day forecast for each city.
+	## For each api request, create goes and loops through the returned call and averages the next seven days' high and low values and adds these values to the temperature array.
+	## It then adds those values - the city averages - to the appropriate location array (ie. naCities for block1 and 2) then averages them out for the week, and adds them to the temp array for all three locations.
+	## Lastly, It also adds the values, for each city's average, to the allAverages - which is the global averages - and adds this on to the end of the temperature array as well.
+
 	def create
 
-		# Hardcoded for simplicity, but params could be passed in with a post request - only issue with this, is that dyanmic params may not work with Wunderground's API
 		#Broke all the cities up into blocks due to API restrictions - calls per a minute. 
 		block1 = [['co', 'Denver'], ['Mexico', 'Mexico_City'], ['ny','New_York'], ['ca','Los_Angeles'], ['Canada', 'Toronto'], ['il', 'Chicago'], ['tx', 'Austin'], ['Cuba', 'Havana'],['or', 'Portland'], ['az','Phoenix']]
 		block2 = [['ca','San_Francisco'], ['Mexico','Juarez'], ['Canada', 'Vancouver'], ['Canada', 'Winnipeg'], ['ga', 'Atlanta'], ['ma', 'Boston'], ['dc', 'Washington'], ['fl', 'Tampa'], ['mo', 'St_Louis'], ['la', 'New_Orleans']]
@@ -32,7 +36,7 @@ class ForecastsController < ApplicationController
 	   
 
 
-	    wKey = ''
+	    wKey = ENV["WG"]
 	    begin
 		    blocks.each_with_index do |region, key|
 		    	regionLow = []
@@ -49,7 +53,7 @@ class ForecastsController < ApplicationController
 					    rescue => e
 					    	flash[:error] = "Could not generate report. Please try again"
             				redirect_to root_path
-            				Rails.logger.info "Forecast failed on the API call"
+            				Rails.logger.info "Forecast failed on the API call... #{e}" 
 					    end
 				    	highs = []
 				    	lows = []
@@ -94,7 +98,7 @@ class ForecastsController < ApplicationController
 		rescue => e
 			flash[:error] = "Something went wrong when generating the forecast"
 			redirect_to root_path
-			Rails.logger.info "Forecast failed somewhere in the looping"
+			Rails.logger.info "Forecast failed somewhere in the looping... #{e}"
 		end
 
 		citiesLength = block1.length + block2.length + block3.length + block4.length + block5.length + block6.length
@@ -131,7 +135,7 @@ class ForecastsController < ApplicationController
 			
 
 		else
-			flash[:error] = "Something went wrong when generating the forecast"
+			flash[:error] = "Something went wrong when generating the forecast, please try again."
 			Rails.logger.info "Failed to save the report"
 		end
 

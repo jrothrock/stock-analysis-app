@@ -1,12 +1,15 @@
 %nav.navbar.navbar-default
 	.navbar-container
-		%button.navbar-toggle.collapsed{"data-target" => "#bs-navbar-collapse-1", "data-toggle" => "collapse", type: "button"}
+		%button.nav-push.nav-selector
 			%span.sr-only Toggle Navigation
 			%span.icon-bar
 			%span.icon-bar
 	.navbar-brand
-		= link_to "Home", root_path, "data-no-turbolink" => true
-	.collapse.navbar-collapse#bs-navbar-collapse-1
+		= link_to "Home", root_path, "data-turbolinks" => false
+	.pushmenu.pushmenu-left.navbar-collapse
+		%button.pushed.nav-selector
+			%span.icon-bar.top
+			%span.icon-bar.bottom
 		%ul.nav.navbar-nav.navbar-right
 			- if user_signed_in?
 				%li 

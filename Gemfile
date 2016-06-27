@@ -23,6 +23,8 @@ gem 'turbolinks', '~> 5.0.0.beta'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem "sprockets"
+gem "sprockets-es6"
 gem 'pg', '~> 0.15'
 gem 'haml', '~> 4.0.6'
 gem 'simple_form', '~> 3.1.0'
@@ -34,6 +36,7 @@ gem 'yahoo-finance'
 gem 'will_paginate', '3.0.6'
 gem 'whenever', :require => false
 gem 'font-awesome-rails'
+gem "browserify-rails"
 
 group :development do 
 	gem 'web-console', '~> 2.0'
