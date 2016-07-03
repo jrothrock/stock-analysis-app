@@ -2,6 +2,7 @@
   Personally, I believe that switching between function() and () => can be confusing - in reference to the jQuery callbacks. 
   Regardless, I used arrow functions in callbacks where scoping was irrelevant. 
 */
+
 var App = {
 
   tabSlideSwitcher(){
@@ -66,9 +67,9 @@ var App = {
   },
 
     afterChart(ScanId){
-    $("#hider-" + ScanId).on("click", function(){
-      $("#container" + ScanId).fadeOut(300, function() { $(this).remove(); });
-      $(".scan-" + ScanId).css({'visibility':'visible'});
+    $(`#hider-${ScanId}`).on("click", function(){
+      $(`#container${ScanId}`).fadeOut(300, function() { $(this).remove(); });
+      $(`.scan-${ScanId}`).css({'visibility':'visible'});
       const $parent = $(this).parent();
       $(this).remove();
       setTimeout(() => { 
@@ -82,7 +83,7 @@ var App = {
   createGraphs(data, stockName, id){
           window.chart = new Highcharts.Chart({
             chart: {
-              renderTo: 'container' + id
+              renderTo: `container${id}`
             },
             title: {
               text: stockName,

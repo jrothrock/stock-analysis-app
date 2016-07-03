@@ -44,40 +44,49 @@ class ForecastsController < ApplicationController
 		    	region.each_with_index do |block, key|
 
 			    	sleep 60
+			    	start_time = Time.now.to_f
 					block.each do |city|
-						begin 
-							Timeout::timeout(10) do
-								@response = HTTParty.get("http://api.wunderground.com/api/#{wKey}/forecast10day/q/#{city[0]}/#{city[1]}.json", verify: false)
-						    	@parsed = JSON.parse(@response.body)
+						thread = []
+						thread << Thread.new do 
+							begin 
+								Timeout::timeout(10) do
+									@response = HTTParty.get("http://api.wunderground.com/api/#{wKey}/forecast10day/q/#{city[0]}/#{city[1]}.json", verify: false)
+							    	@parsed = JSON.parse(@response.body)
+							    end
+						    rescue => e
+						    	flash[:error] = "Could not generate report. Please try again"
+	            				redirect_to root_path
+	            				Rails.logger.info "Forecast failed on the API call... #{e}" 
 						    end
-					    rescue => e
-					    	flash[:error] = "Could not generate report. Please try again"
-            				redirect_to root_path
-            				Rails.logger.info "Forecast failed on the API call... #{e}" 
-					    end
-				    	highs = []
-				    	lows = []
-				    	currentCity = city[1].gsub('_', ' ')
-				    	
-				    	7.times do |i|
+					    	highs = []
+					    	lows = []
+					    	currentCity = city[1].gsub('_', ' ')
 					    	
-					    
-					    	highs << @parsed['forecast']['simpleforecast']['forecastday'][i]['high']['fahrenheit'].to_i #days high
-					    	lows << @parsed['forecast']['simpleforecast']['forecastday'][i]['low']['fahrenheit'].to_i #days low
+					    	7.times do |i|
+						    	
+						    
+						    	highs << @parsed['forecast']['simpleforecast']['forecastday'][i]['high']['fahrenheit'].to_i #days high
+						    	lows << @parsed['forecast']['simpleforecast']['forecastday'][i]['low']['fahrenheit'].to_i #days low
 
-				   		end
+					   		end
 
-				   		averageLow = (lows.sum / 7)
-		   				averageHigh = (highs.sum / 7)
-		   				allAverageLows << averageLow
-		   				allAverageHighs << averageHigh
-		   				regionLow << averageLow
-		   				regionHigh << averageHigh
+					   		averageLow = (lows.sum / 7)
+			   				averageHigh = (highs.sum / 7)
+			   				allAverageLows << averageLow
+			   				allAverageHighs << averageHigh
+			   				regionLow << averageLow
+			   				regionHigh << averageHigh
 
-				   		temperatures << [currentCity,highs,lows,averageLow,averageHigh]
+					   		Thread.current[:output] = [currentCity,highs,lows,averageLow,averageHigh]
 				   	
-
+					   	end
+						thread.each do |t|
+							t.join
+							temperatures << t[:output]
+							puts t[:output]
+						end
 					end
+				    puts "This took #{Time.now.to_f - start_time} secs."
 
 				end
 

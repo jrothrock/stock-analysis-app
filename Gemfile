@@ -36,7 +36,6 @@ gem 'yahoo-finance'
 gem 'will_paginate', '3.0.6'
 gem 'whenever', :require => false
 gem 'font-awesome-rails'
-gem "browserify-rails"
 
 group :development do 
 	gem 'web-console', '~> 2.0'
